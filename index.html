@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prislista Simulator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Pris Simulator</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Antal</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="antalHeltid" class="form-label">Antal heltid (66 kr/st)</label>
+                            <input type="number" class="form-control input-blue" id="antalHeltid" value="300">
+                        </div>
+                        <div class="mb-3">
+                            <label for="antalDeltid" class="form-label">Antal deltid (16,50 kr/st)</label>
+                            <input type="number" class="form-control input-blue" id="antalDeltid" value="300">
+                        </div>
+                        <div class="mb-3">
+                            <label for="antalSasongare" class="form-label">Antal säsongare (66 kr/st)</label>
+                            <input type="number" class="form-control input-blue" id="antalSasongare" value="3030">
+                        </div>
+                        <div class="mb-3">
+                            <label for="sasongManader" class="form-label">Antal månader säsongare</label>
+                            <input type="number" class="form-control input-blue" id="sasongManader" value="4" min="1" max="12">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Välj månader</label>
+                            <div id="monthButtons" class="d-flex flex-wrap">
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="1">Jan</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="2">Feb</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="3">Mar</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="4">Apr</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="5">Maj</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="6">Jun</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="7">Jul</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="8">Aug</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="9">Sep</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="10">Okt</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="11">Nov</button>
+                                <button type="button" class="btn btn-outline-primary m-1" data-month="12">Dec</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Uppstartsavgift och Konsulttimmar</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="uppstartsTyp" id="uppstartLiten" value="5000">
+                            <label class="form-check-label" for="uppstartLiten">
+                                Liten (5 000 kr)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="uppstartsTyp" id="uppstartMedel" value="10000" checked>
+                            <label class="form-check-label" for="uppstartMedel">
+                                Mellan (10 000 kr)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="uppstartsTyp" id="uppstartStor" value="25000">
+                            <label class="form-check-label" for="uppstartStor">
+                                Stor (25 000 kr)
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <label for="konsultTimmar" class="form-label">Konsulttimmar</label>
+                            <select class="form-select" id="konsultTimmar">
+                                <option value="0">0 timmar</option>
+                                <option value="1000">1 timme (1 000 kr)</option>
+                                <option value="9000">10 timmar (9 000 kr)</option>
+                                <option value="20000">25 timmar (20 000 kr)</option>
+                                <option value="35000">50 timmar (35 000 kr)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Totalkostnad</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Licenskostnad per månad: <span id="licensKostnadManad">0</span> kr</p>
+                        <p>Licenskostnad per år: <span id="licensKostnadAr">0</span> kr</p>
+                        <p>Uppstartsavgift: <span id="uppstartsavgift">10000</span> kr</p>
+                        <p>Konsulttimmar: <span id="konsultTimmarKostnad">0</span> kr</p>
+                        <hr>
+                        <p>Snittkostnad per användare: <span id="snittkostnadAnvandare">0</span> kr</p>
+                        <p>Snittkostnad per månad: <span id="snittkostnadManad">0</span> kr</p>
+                        <p>Rabatt per månad: <span id="rabattPerManad">0</span> kr</p>
+                        <hr>
+                        <p>Totalkostnad: <span id="totalkostnad">0</span> kr</p>
+                        <p class="text-danger">Rabatt total: <span id="rabattTotal">0</span> kr</p>
+                        <hr>
+                        <div class="mb-3">
+                            <label for="provision" class="form-label">Provision %</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="provision" value="5" min="0" max="100" step="0.1">
+                                <span class="input-group-text">%</span>
+                            </div>
+                        </div>
+                        <p class="text-success">Provisionsbelopp: <span id="provisionsBelopp">0</span> kr</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Månadskostnader</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
